@@ -2,7 +2,13 @@
 
 A small collection of utilities to use with [Helix](https://helix-editor.com/).
 
-## Installation:
+## Installation
+
+### Pre-requisites
+
+Ensure you have `stack` installed - see [here](https://docs.haskellstack.org/en/stable/install_and_upgrade/) for further information.
+
+### Instructions
 
 Clone the repo to your local machine and run
 
@@ -37,4 +43,4 @@ $ echo "this is some Text" | u c ss # screaming snake case
 THIS_IS_SOME_TEXT
 $ echo "this is some Text" | u c k  # kebab case
 this-is-some-text
-````
+```
