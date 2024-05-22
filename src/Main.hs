@@ -71,14 +71,12 @@ transformText = \case
 splitWordsAndSpaces :: String -> [String]
 splitWordsAndSpaces = groupBy $ \a b -> isSpace a == isSpace b
 
-processParts :: CaseType -> [String] -> String
-processParts caseType = concatMap $ \part ->
-  if all isSpace part
-    then part
-    else transformText caseType part
-
 transformLine :: CaseType -> String -> String
-transformLine caseType = processParts caseType . splitWordsAndSpaces
+transformLine caseType = concatMap transformWord . splitWordsAndSpaces
+ where
+  transformWord part
+    | all isSpace part = part
+    | otherwise = transformText caseType part
 
 main :: IO ()
 main = do
