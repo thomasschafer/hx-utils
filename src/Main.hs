@@ -1,22 +1,24 @@
 module Main (main) where
 
-import Options.Applicative
-  ( Parser,
-    ParserInfo,
-    argument,
-    command,
-    eitherReader,
-    execParser,
-    fullDesc,
-    header,
-    help,
-    helper,
-    info,
-    metavar,
-    progDesc,
-    subparser,
-    (<**>),
-  )
+import Data.Char (isSpace)
+import Data.List (groupBy)
+import Options.Applicative (
+  Parser,
+  ParserInfo,
+  argument,
+  command,
+  eitherReader,
+  execParser,
+  fullDesc,
+  header,
+  help,
+  helper,
+  info,
+  metavar,
+  progDesc,
+  subparser,
+  (<**>),
+ )
 import Text.Casing (camel, kebab, pascal, quietSnake, screamingSnake)
 
 newtype Action = ConvertCase CaseType
@@ -66,10 +68,22 @@ transformText = \case
   ScreamingSnake -> screamingSnake
   Kebab -> kebab
 
+splitWordsAndSpaces :: String -> [String]
+splitWordsAndSpaces = groupBy $ \a b -> isSpace a == isSpace b
+
+processParts :: CaseType -> [String] -> String
+processParts caseType = concatMap $ \part ->
+  if all isSpace part
+    then part
+    else transformText caseType part
+
+transformLine :: CaseType -> String -> String
+transformLine caseType = processParts caseType . splitWordsAndSpaces
+
 main :: IO ()
 main = do
   action <- execParser opts
   case action of
     ConvertCase caseType -> do
       input <- getContents
-      putStr $ transformText caseType input
+      putStr $ transformLine caseType input
