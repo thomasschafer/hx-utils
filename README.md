@@ -6,14 +6,14 @@ A small collection of utilities to use with [Helix](https://helix-editor.com/).
 
 ### Pre-requisites
 
-Ensure you have `stack` installed - see [here](https://docs.haskellstack.org/en/stable/install_and_upgrade/) for further information.
+Ensure you have `cargo` installed - see [here](https://doc.rust-lang.org/cargo/getting-started/installation.html) for further information.
 
 ### Instructions
 
 Clone the repo to your local machine and run
 
 ```sh
-$ stack install hx-utils
+$ cargo install --path .
 ```
 
 Optionally, add a shorter alias for easier use in Helix. For instance, to use `u` as an alias for `hx-utils`:

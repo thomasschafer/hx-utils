@@ -1,0 +1,8 @@
+[package]
+name = "hx-utils"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+clap = { version = "4.0", features = ["derive"] }
+convert_case = "0.6"
